@@ -46,7 +46,7 @@ ctx.prec = precision
 ctx.Emax = 999_999_999_999_999_999
 ctx.Emin = -999_999_999_999_999_999
 
-mpmath.mp.dps = precision * 10
+mpmath.mp.dps = precision
 
 def main():
     print("\nEnter 'exit' or 'quit' to exit.")
