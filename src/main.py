@@ -16,7 +16,7 @@ while True:
         exit()
 
     try:
-        precision_input: str = input(f"Enter precision (default {precision}): ").strip()
+        precision_input: str = input(f"Enter precision for constants and significands (default {precision}): ").strip()
 
         if precision_input == '':
             break
@@ -50,7 +50,6 @@ mpmath.mp.dps = precision * 10
 
 def main():
     print("\nEnter 'exit' or 'quit' to exit.")
-    print("Remember to use 'Decimal()' in your inputs (e.g. `Decimal(str(mpmath.mp.pi)) * Decimal('2')`).")
 
     is_exit: bool = False
 
@@ -67,7 +66,7 @@ def main():
             try:
                 if user_confirm_eval in ('y', 'yes', ''):
                     start_time = Decimal(str(perf_counter())) # ensure no floating point inaccuracies with Decimal
-                    output_number = eval(input_equation)
+                    output_number = Decimal(str(eval(input_equation)))
                     end_time = Decimal(str(perf_counter()))
 
                     total_time_sec = end_time - start_time
@@ -76,12 +75,11 @@ def main():
                     total_time_min = total_time_sec / 60
                     total_time_hr = (total_time_sec / 60) / 60
 
-                    if (Decimal(str(output_number)) >= Decimal('1e+100')) or (Decimal(str(output_number)) <= Decimal('1e-100')):
+
+                    if (mpmath.fabs(output_number) >= Decimal('1e+100')) or (mpmath.fabs(output_number) <= Decimal('1e-100')):
                         print(f"[OUTPUT]  {output_number:,.{precision}e}")
-                    elif isinstance(output_number, int):
-                        print(f"[OUTPUT]  {output_number:,}")
                     else:
-                        print(f"[OUTPUT]  {output_number:,.{precision}f}")
+                        print(f"[OUTPUT]  {output_number:,}")
 
                     print(f"\n              Calculation time: {total_time_ns:,.2f} ns")
                     print(f"                                {total_time_sec:,.10f} sec")
