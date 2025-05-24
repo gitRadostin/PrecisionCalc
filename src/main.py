@@ -38,7 +38,6 @@ while True:
     except ValueError:
         print("[ERROR]   Enter a valid integer.")
         input_count += 1
-    
 
 set_int_max_str_digits(0)
 
