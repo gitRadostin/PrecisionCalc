@@ -7,20 +7,38 @@ import sympy
 from time import perf_counter
 from sys import set_int_max_str_digits, exit
 
-input_count = 0
+input_count: int = 0
+precision: int = 100 # default value
 
 while True:
+    if input_count >= 3:
+        print("[ERROR]   Too many invalid inputs, exiting.")
+        exit()
+
     try:
-        precision: int = int(input("Enter precision: "))
-        break
+        precision_input: str = input(f"Enter precision (default {precision}): ").strip()
+
+        if precision_input == '':
+            break
+
+        precision_input_int: int = int(precision_input)
+
+        if precision_input_int < 0:
+            print("[ERROR]   Precision must be a positive integer.")
+            input_count += 1
+
+        elif precision_input_int == 0:
+            print("[ERROR]   Precision must be 1 or greater.")
+            input_count += 1
+
+        else:
+            precision = precision_input_int
+            break
 
     except ValueError:
-        print("[ERROR]   Enter a valid integer")
+        print("[ERROR]   Enter a valid integer.")
         input_count += 1
-
-    if input_count >= 3:
-        print("[ERROR] Too many invalid inputs, exiting")
-        exit()
+    
 
 set_int_max_str_digits(0)
 
@@ -33,18 +51,19 @@ mpmath.mp.dps = precision * 10
 
 def main():
     print("\nEnter 'exit' or 'quit' to exit.")
+    print("Remember to use 'Decimal()' in your inputs (e.g. `Decimal(str(mpmath.mp.pi)) * Decimal('2')`).")
 
     is_exit: bool = False
 
     while not is_exit:
-        input_equation = input("\n[INPUT]   ")
+        input_equation: str = input("\n[INPUT]   ").strip()
 
         if input_equation in ('exit', 'quit'):
             is_exit = True
             break
 
         if input_equation != '':
-            user_confirm_eval = input("[CONFIRM] Do you want to run the evaluation/calculation? (Y/n): ").lower()
+            user_confirm_eval: str = input("[CONFIRM] Do you want to run the evaluation/calculation? (Y/n): ").strip().lower()
 
             try:
                 if user_confirm_eval in ('y', 'yes', ''):
@@ -71,7 +90,7 @@ def main():
                     print(f"                                {total_time_hr:,.2f} hr")
 
                 elif user_confirm_eval in ('n', 'no', 'exit', 'quit'):
-                    print("Exiting")
+                    print("Exiting.")
                     is_exit = True
                     break
 
