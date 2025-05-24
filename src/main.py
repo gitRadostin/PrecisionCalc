@@ -76,7 +76,7 @@ def main():
                     total_time_hr = (total_time_sec / 60) / 60
 
 
-                    if (mpmath.fabs(output_number) >= Decimal('1e+100')) or (mpmath.fabs(output_number) <= Decimal('1e-100')):
+                    if (Decimal(str(mpmath.fabs(output_number))) >= Decimal('1e+100')) or (Decimal(str(mpmath.fabs(output_number))) <= Decimal('1e-100')):
                         print(f"[OUTPUT]  {output_number:,.{precision}e}")
                     else:
                         print(f"[OUTPUT]  {output_number:,}")
