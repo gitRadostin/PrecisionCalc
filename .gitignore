@@ -1,6 +1,13 @@
+# environment
 .venv/
+
+# pyinstaller
 build/
 dist/
-
 *.spec
+
+# logs
 *.log
+
+# temporary
+__pycache__/
