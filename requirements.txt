@@ -1,0 +1,8 @@
+decimal
+numpy
+mpmath
+cmath
+scipy
+sympy
+time
+sys
