@@ -7,11 +7,11 @@ import sympy
 from time import perf_counter
 from sys import set_int_max_str_digits, exit
 
-input_count: int = 0
+input_attemps: int = 0
 precision: int = 100 # default value
 
 while True:
-    if input_count >= 3:
+    if input_attemps >= 3:
         print("[ERROR]   Too many invalid inputs, exiting.")
         exit()
 
@@ -25,11 +25,11 @@ while True:
 
         if precision_input_int < 0:
             print("[ERROR]   Precision must be a positive integer.")
-            input_count += 1
+            input_attemps += 1
 
         elif precision_input_int == 0:
             print("[ERROR]   Precision must be 1 or greater.")
-            input_count += 1
+            input_attemps += 1
 
         else:
             precision = precision_input_int
@@ -37,7 +37,7 @@ while True:
 
     except ValueError:
         print("[ERROR]   Enter a valid integer.")
-        input_count += 1
+        input_attemps += 1
 
 set_int_max_str_digits(0)
 
