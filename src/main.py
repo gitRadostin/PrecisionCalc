@@ -28,7 +28,7 @@ ctx = getcontext()
 ctx.prec = precision
 ctx.Emax = 999_999_999_999_999_999
 ctx.Emin = -999_999_999_999_999_999
-mpmath.ln
+
 mpmath.mp.dps = precision * 10
 
 def main():
